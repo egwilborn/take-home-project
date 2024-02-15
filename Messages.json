@@ -1,7 +1,7 @@
 [
   {
     "title": "Room is ready",
-    "message": "`${greeting} ${firstName}, and welcome to {company}. Room {roomNumber} is now ready for you. Enjoy your stay and let us know if you need anything.`"
+    "message": "{{greeting}} {{firstName}}, and welcome to {{company}}. Room {{roomNumber}} is now ready for you. Enjoy your stay and let us know if you need anything."
   },
   {
     "title": "Welcome to city",
