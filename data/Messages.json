@@ -7,7 +7,7 @@
   {
     "id": 2,
     "title": "Welcome to city",
-    "message": "Hi {{guestName}}! Is this your first time visiting {{city}}? There’s loads to do around here. Let us know if you’re looking for any recommendations"
+    "message": "Hi {{firstName}}! Is this your first time visiting {{city}}? There’s loads to do around here. Let us know if you’re looking for any recommendations."
   },
   {
     "id": 3,
@@ -17,6 +17,6 @@
   {
     "id": 4,
     "title": "Food recommendations",
-    "message": "{{greeting}} {{firstName}}, are you hungry for {{meal}}? You’re welcome to enjoy room service here, or we are happy to provide some recommendations here in {{city}}!"
+    "message": "{{greeting}} {{firstName}}, are you hungry? You’re welcome to enjoy room service here until 9pm, or we are happy to provide some recommendations here in {{city}}!"
   }
 ]
