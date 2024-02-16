@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "Room is ready",
+    "message": "{{greeting}} {{firstName}}, and welcome to {{company}}. Room {{roomNumber}} is now ready for you. Enjoy your stay and let us know if you need anything."
+  },
+  {
+    "id": 2,
+    "title": "Welcome to city",
+    "message": "Hi {{guestName}}! Is this your first time visiting {{city}}? There’s loads to do around here. Let us know if you’re looking for any recommendations"
+  },
+  {
+    "id": 3,
+    "title": "Room is not ready",
+    "message": "Hi {{firstName}}! Welcome to {{company}}. Unfortunately, your room is not yet ready. While we are preparing it, we are happy to hold your luggage while you go explore {{city}}. Let us know if you’d like any recommendations."
+  },
+  {
+    "id": 4,
+    "title": "Food recommendations",
+    "message": "{{greeting}} {{firstName}}, are you hungry for {{meal}}? You’re welcome to enjoy room service here, or we are happy to provide some recommendations here in {{city}}!"
+  }
+]
