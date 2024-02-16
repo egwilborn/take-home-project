@@ -6,54 +6,55 @@ const messages = require("./data/Messages.json");
 const parse = require("json-templates");
 const prompt = require("prompt");
 
-//Goal: render message based on state variables
-//state variables
-let companyId = 1;
-let guestId = 2;
-// Time dependent variables
-let greeting = "Hi";
-// get time from timestamp
-const arrivalTimeStamp = guests[guestId - 1].reservation.startTimestamp;
-const dateTime = new Date(arrivalTimeStamp);
-//adjust for local time to company
-const timeZone = {
-  timeZone: companies[companyId - 1].timezone,
-  timeZoneName: "long",
-};
-const arrivalTime = dateTime.toLocaleTimeString("en-US", timeZone);
-// determine greeting and meal based on time
-let currentTime = arrivalTime;
-
-const hour = parseInt(currentTime);
-if (currentTime.includes("AM")) {
-  greeting = "Good morning";
-} else if (currentTime.includes("PM") && hour > 6) {
-  greeting = "Good evening";
-} else {
-  greeting = "Good afternoon";
-}
-
-// compile all relavent information into one object
-const reservationInfo = {
-  company: companies[companyId - 1].company,
-  city: companies[companyId - 1].city,
-  firstName: guests[guestId - 1].firstName,
-  lastName: guests[guestId - 1].lastName,
-  roomNumber: guests[guestId - 1].reservation.roomNumber,
-  arrivalTime: arrivalTime,
-  greeting: greeting,
-};
-// submit object into template
-// render message
+//----- Goal: render message based on state variables defined by input from user -----//
+//prompt input for company, guest, and message using prompt package
 prompt.start();
 console.log(
-  "Choose what kind of message you'd like to send your guest, (1) room is ready, (2) welcome to the city, (3) room is not ready, (4) food recommendations, or (5) custom"
+  `Please input the id number of the hotel (# 1-${companies.length}) and guest (# 1-${guests.length1}) you would like to contact. Then decide which of the following messages you would like to send: (1) Room is ready, (2) Welcome to the city, (3) Room is not ready, (4) Food recommendations, (5) Custom message`
 );
-prompt.get(["messageNo"], function (err, result) {
-  if (parseInt(result.messageNo) < 5) {
-    const messageTemplate = parse(messages[result.messageNo - 1].message);
+prompt.get(["companyId", "guestId", "messageId"], function (err, result) {
+  const companyId = result.companyId;
+  const guestId = result.guestId;
+  const messageId = result.messageId;
+  // ----- now need to determine time for greeting ----- //
+  let greeting = "Hi"; // the default greeting
+
+  // get time from timestamp
+  const currentTimeStamp = new Date();
+  //adjust for local time to company
+  const timeZone = {
+    timeZone: companies[companyId - 1].timezone,
+    timeZoneName: "long",
+  };
+  const currentTime = currentTimeStamp.toLocaleTimeString("en-US", timeZone);
+  console.log(currentTime);
+
+  // determine greeting based on time
+  const hour = parseInt(currentTime);
+  if (currentTime.includes("AM")) {
+    greeting = "Good morning";
+  } else if (currentTime.includes("PM") && hour > 6) {
+    greeting = "Good evening";
+  } else {
+    greeting = "Good afternoon";
+  }
+
+  // ------ compile all relavent information into one object ------ //
+  const reservationInfo = {
+    company: companies[companyId - 1].company,
+    city: companies[companyId - 1].city,
+    firstName: guests[guestId - 1].firstName,
+    lastName: guests[guestId - 1].lastName,
+    roomNumber: guests[guestId - 1].reservation.roomNumber,
+    currentTime: currentTime,
+    greeting: greeting,
+  };
+  // ----- Render Message or Ask for Input for Custom Message ---- //
+  if (parseInt(messageId) < 5) {
+    const messageTemplate = parse(messages[messageId - 1].message);
     console.log(messageTemplate(reservationInfo));
   } else {
+    // ask for custom message based on number
     console.log(
       `Write your message to ${reservationInfo.firstName} ${reservationInfo.lastName} in room ${reservationInfo.roomNumber} at ${reservationInfo.company}`
     );
@@ -62,3 +63,9 @@ prompt.get(["messageNo"], function (err, result) {
     });
   }
 });
+
+// ------- NEEDS the Following ------- //
+// fix the greeting time problem
+// consider adding tests or notes for tests
+// add a readme
+// currently at 4-5 hours of work
