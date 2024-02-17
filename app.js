@@ -47,7 +47,6 @@ prompt.get(["companyId", "guestId", "messageId"], function (err, result) {
     firstName: guests[guestId - 1].firstName,
     lastName: guests[guestId - 1].lastName,
     roomNumber: guests[guestId - 1].reservation.roomNumber,
-    currentTime: currentTime,
     greeting: greeting,
   };
   // ----- Render Message or Ask for Input for Custom Message ---- //
